@@ -36,7 +36,7 @@ class IOULoss(nn.Module):
         area_union = target_aera + pred_aera - area_intersect
 
         #giou 
-        giou = (area_intersect + 1.0) / (area_union + 1.0) - (C_aera - area_union)/(C_aera)
+        giou = (area_intersect) / (area_union) - (C_aera - area_union)/(C_aera)
         # losses = -torch.log((area_intersect + 1.0) / (area_union + 1.0))
         # giou losses
         # losses = 1 - giou
