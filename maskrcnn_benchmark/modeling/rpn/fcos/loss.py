@@ -9,6 +9,7 @@ from torch import nn
 
 from ..utils import concat_box_prediction_layers
 from maskrcnn_benchmark.layers import IOULoss
+from maskrcnn_benchmark.layers import ExpGIOULoss
 from maskrcnn_benchmark.layers import SigmoidFocalLoss
 from maskrcnn_benchmark.modeling.matcher import Matcher
 from maskrcnn_benchmark.modeling.utils import cat
@@ -31,7 +32,9 @@ class FCOSLossComputation(object):
         )
         # we make use of IOU Loss for bounding boxes regression,
         # but we found that L1 in log scale can yield a similar performance
-        self.box_reg_loss_func = IOULoss()
+        # self.box_reg_loss_func = IOULoss()
+        # change IOULoss to ExpGIOULoss 
+        self.box_reg_loss_func = ExpGIOULoss()
         self.centerness_loss_func = nn.BCEWithLogitsLoss()
 
     def prepare_targets(self, points, targets):
