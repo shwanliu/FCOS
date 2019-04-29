@@ -2,7 +2,7 @@ import torch
 from torch import nn
 
 
-class ExpGIOULoss(nn.Module):
+class IOULoss(nn.Module):
     def forward(self, pred, target, weight=None):
         pred_left = pred[:, 0]
         pred_top = pred[:, 1]
